@@ -18,7 +18,13 @@ namespace ElectionResults.WebApi.Controllers
         [HttpGet("")]
         public async Task<ElectionResultsData> GetLatestResults([FromQuery] ResultsType type)
         {
-            return await _resultsAggregator.GetResults(type);
+            return await _resultsAggregator.GetLatestResults(type);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ElectionResultsData> GetElectionResults(string id)
+        {
+            return await _resultsAggregator.GetElectionResults(id);
         }
     }
 }

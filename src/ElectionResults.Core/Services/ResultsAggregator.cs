@@ -17,7 +17,8 @@ namespace ElectionResults.Core.Services
         {
             _resultsRepository = resultsRepository;
         }
-        public async Task<ElectionResultsData> GetResults(ResultsType type)
+
+        public async Task<ElectionResultsData> GetLatestResults(ResultsType type)
         {
             string resultsType = ConvertEnumToString(type);
 
@@ -26,6 +27,11 @@ namespace ElectionResults.Core.Services
             var localResultsData = JsonConvert.DeserializeObject<ElectionResultsData>(localResults.StatisticsJson);
             var diasporaResultsData = JsonConvert.DeserializeObject<ElectionResultsData>(diasporaResults.StatisticsJson);
             return StatisticsAggregator.CombineResults(localResultsData, diasporaResultsData);
+        }
+
+        public Task<ElectionResultsData> GetElectionResults(string id)
+        {
+            throw new System.NotImplementedException();
         }
 
         private static string ConvertEnumToString(ResultsType type)
